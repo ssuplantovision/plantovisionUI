@@ -13,6 +13,13 @@ function App() {
           <h1>Icons</h1>
         </div>
       </header>
+      <center>
+        <div>
+          <h1>Добро пожаловать!</h1>
+          <div className='singIn'>Войти</div>
+          <div className='singUp'>Зарегестрироваться</div>
+        </div>
+      </center>
     </div>
   );
 }

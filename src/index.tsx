@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import About from "./About";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-
+import SingUp from "./pages/SingUp/SingUp";
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -15,9 +15,10 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="about" element={<About />} />
-      <Route path="home" element={<Home />} />
-      <Route path="login" element={<Login />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/singup" element={<SingUp />} />
     </Routes>
 </BrowserRouter>
 );

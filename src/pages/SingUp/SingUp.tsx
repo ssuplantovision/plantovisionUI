@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate  } from "react-router-dom";
-import '../Login/Login.css';
+import '../SingUp/SingUp.css';
 import { Link } from "react-router-dom";
-function Login() {
+function SingUp() {
 
   let navigate = useNavigate();
   const getBackPage = () =>{
@@ -21,8 +21,9 @@ function Login() {
       {/* </Link> */}
       </header>
       <div className='header_line'/>
+      <div className='header_line'/>
       <center>
-        <h1>Авторизация</h1>
+        <h1>Регистрация</h1>
         <div className='input_block'>
           <div className='logIn_user_name'>
             <a>Имя пользователя</a>
@@ -39,22 +40,20 @@ function Login() {
               <input type='password' placeholder='Введите пароль...'></input>
             </div>
           </div>
-          <a className='forgoten_passowrd'>Забыли пароль?</a>
           <div className='logIn_enter'>
-            <h1>Войти</h1>
+            <h1>Создать аккаунт</h1>
           </div>
         </div>
-       
         <div className='singUp_block'>
-        <Link to='/singup' style={{ textDecoration: 'none' }}>
+        <Link to='/login' style={{ textDecoration: 'none' }}>
           <a>
-            Создать аккаунт
+            Войти в аккаунт
           </a>
-          </Link>
+          </Link> 
         </div>
       </center>
     </div>
   );
 }
 
-export default Login;
+export default SingUp;

@@ -1,25 +1,34 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './index.css';
 import { Link } from "react-router-dom";
 
 
 function App() {
+  
+
+  const handleClick = () => {
+    
+  };
+
   return (
     <div className="App">
-      <header>
-        <h1>PlantoVision</h1>
-        <div>
-          <h1>Icons</h1>
-        </div>
-      </header>
-      <center>
-        <div>
-          <h1>Добро пожаловать!</h1>
-          <div className='singIn'>Войти</div>
-          <div className='singUp'>Зарегестрироваться</div>
-        </div>
-      </center>
+    
+    {/* <Link to="login">Home</Link> */}
+    <header>
+      <div className='header_icon'/>
+      <div className='logIn_block'>
+      <Link to='/login' style={{ textDecoration: 'none' }}>
+        <h1>Войти</h1>
+      </Link>
+      <Link to='/singup' style={{ textDecoration: 'none' }}>
+        <h1>Зарегестрироваться</h1>
+        </Link>
+      </div>
+      
+    </header>
+    <div className='header_line'/>
     </div>
   );
 }

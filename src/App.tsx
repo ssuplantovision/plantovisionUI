@@ -19,6 +19,9 @@ function App() {
     <header>
       <div className='header_icon'/>
       <div className='logIn_block'>
+      <Link to='/profile' style={{ textDecoration: 'none' }}>
+        <h1>Личный кабинет</h1>
+        </Link>
       <Link to='/login' style={{ textDecoration: 'none' }}>
         <h1>Войти</h1>
       </Link>

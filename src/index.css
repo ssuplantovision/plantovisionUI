@@ -33,8 +33,9 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1;
   background: linear-gradient(45deg, rgba(0,247,255,1) 0%, rgba(0,131,255,1) 100%) center 0 round;
-
+  /* background-color: #f4f6fa; */
 }
+
 ol, ul {
   list-style: none;
 }

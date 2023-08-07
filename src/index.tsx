@@ -8,6 +8,7 @@ import About from "./About";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import SingUp from "./pages/SingUp/SingUp";
+import Profile from "./pages/Profile/Profile";
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -19,6 +20,7 @@ root.render(
       <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/singup" element={<SingUp />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
 </BrowserRouter>
 );

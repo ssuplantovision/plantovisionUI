@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import { useNavigate  } from "react-router-dom";
 import '../SingUp/SingUp.css';
 import { Link } from "react-router-dom";
@@ -9,7 +9,19 @@ function SingUp() {
       navigate('/')
     
   }
-
+  const [password, setPassword] = useState('');
+  const [login, setLogin] = useState('');
+  const [error, setError] = useState('');
+  const handleLogin = () => {
+    if (password === '') {
+      setError('Пожалуйста, введите пароль.');
+    } else if (login === ''){
+      setError('Пожалуйста, введите логин.');
+      
+    }else{
+      setError('');
+    }
+  };
 
 
   return (
@@ -29,7 +41,9 @@ function SingUp() {
             <a>Имя пользователя</a>
             <div className='logIn_user_name_block'>
               <div className='logIn_user_name_block_icon'/>
-              <input placeholder='Введите логин...' className='logIn_user_name_input'></input>
+              <input placeholder='Введите логин...' className='logIn_user_name_input'
+               value={login}
+               onChange={(e) => setLogin(e.target.value)}></input>
             </div>
           </div>
           
@@ -37,12 +51,14 @@ function SingUp() {
             <a>Пароль</a>
             <div className='logIn_user_password_block'>
               <div className='logIn_user_password_block_icon'/>
-              <input type='password' placeholder='Введите пароль...'></input>
+              <input type='password' placeholder='Введите пароль...' value={password}
+                onChange={(e) => setPassword(e.target.value)}></input>
             </div>
           </div>
           <div className='logIn_enter'>
-            <h1>Создать аккаунт</h1>
+            <h1 onClick={handleLogin}>Создать аккаунт</h1>
           </div>
+          {error && <div style={{ color: 'red' }}>{error}</div>}
         </div>
         <div className='singUp_block'>
         <Link to='/login' style={{ textDecoration: 'none' }}>

@@ -31,79 +31,16 @@ function Profile() {
       <header>
       <div className='header_icon' onClick={getBackPage} style={{cursor:"pointer"}}/>
       </header>
-      <div className='header_line'/>
+      {/* <div className='header_line'/> */}
       <div className='Profile_center'>
-      <div className='profile_center_left'>
-        <div className='profile_center_left_image_block'>
-          <div className='profile_center_left_image_block_icon' />
-          <div className='profile_center_left_image_block_redact'>
-            {isEditing ? (
-              <h1 onClick={handleSaveClick}>Сохранить</h1>
-            ) : (
-              <h1 onClick={handleEditClick}>Редактировать</h1>
-            )}
-          </div>
+        <div className='Profile_image'>
+          <div className='Profile_image_icon'/>
+          <a>Сергей</a>
+          <a>Миронов</a>
         </div>
-      </div>
-      <div className='profile_center_right'>
-        <div className='profile_center_right_name'>
-          {isEditing ? (
-            <>
-              <input
-              className='profile_center_right_input'
-                type='text'
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              <input
-                className='profile_center_right_input'
-                type='text'
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </>
-          ) : (
-            <>
-              <a>{firstName} </a>
-              <a>{lastName} </a>
-            </>
-          )}
+        <div className='Profile_info'>
+
         </div>
-        <div className='profile_center_right_old'>
-          {isEditing ? (
-            <>
-              <input
-                className='profile_center_right_input'
-                type='text'
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-              />
-            </>
-          ) : (
-            <>
-              <a id='profile_center_right_old_old'>Возраст: </a>
-              <a>{age} </a>
-            </>
-          )}
-        </div>
-        <div className='profile_center_right_old'>
-          {isEditing ? (
-            <>
-              <input
-              className='profile_center_right_input'
-                type='text'
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </>
-          ) : (
-            <>
-              <a id='profile_center_right_old_old'>Адрес: </a>
-              <a>{address} </a>
-            </>
-          )}
-        </div>
-      </div>
     </div>
     </div>
   );

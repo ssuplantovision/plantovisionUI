@@ -32,7 +32,7 @@ function Login() {
       {/* </Link> */}
       </header>
       <div className='header_line'/>
-      <center>
+      <div className='centerLogin'>
         <h1>Авторизация</h1>
         <div className='input_block'>
           <div className='logIn_user_name'>
@@ -71,7 +71,7 @@ function Login() {
           </a>
           </Link>
         </div>
-      </center>
+      </div>
     </div>
   );
 }

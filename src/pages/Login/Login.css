@@ -1,6 +1,6 @@
 
 
-center{
+.centerLogin{
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@ center{
   background: white;
   border-radius: 10px;
 }
-center h1{
+.centerLogin h1{
   margin-top: 10%;
   font-size: xx-large;
 }

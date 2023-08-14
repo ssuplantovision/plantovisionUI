@@ -5,11 +5,11 @@ header{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 20px;
+  height: 2vh;
   /* width: 90%; */
-  margin: 20px auto;
+  margin: 3vh auto;
   /* background: white; */
-  border-radius: 4.75904px;
+ 
 }
 .header_icon{
   width: 150px;

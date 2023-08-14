@@ -11,12 +11,16 @@ function SingUp() {
   }
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState('');
+  const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const handleLogin = () => {
     if (password === '') {
       setError('Пожалуйста, введите пароль.');
     } else if (login === ''){
       setError('Пожалуйста, введите логин.');
+      
+    }else if (email === ''){
+      setError('Пожалуйста, введите почту.');
       
     }else{
       setError('');
@@ -46,7 +50,14 @@ function SingUp() {
                onChange={(e) => setLogin(e.target.value)}></input>
             </div>
           </div>
-          
+          <div className='logIn_user_password'>
+            <a>Почта</a>
+            <div className='logIn_user_password_block'>
+              <div className='logIn_user_password_block_icon' id='logIn_user_email_block_icon'/>
+              <input type='password' placeholder='Введите почту...' value={email}
+                onChange={(e) => setEmail(e.target.value)}></input>
+            </div>
+          </div>
           <div className='logIn_user_password'>
             <a>Пароль</a>
             <div className='logIn_user_password_block'>
@@ -55,6 +66,7 @@ function SingUp() {
                 onChange={(e) => setPassword(e.target.value)}></input>
             </div>
           </div>
+          
           <div className='logIn_enter'>
             <h1 onClick={handleLogin}>Создать аккаунт</h1>
           </div>

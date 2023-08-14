@@ -6,7 +6,7 @@ center{
   flex-direction: column;
   /* align-items: center;
   justify-content: space-between; */
-  height: 500px;
+  height: 550px;
   width: 400px;
   margin: 20px auto;
   background: white;
@@ -43,7 +43,9 @@ center h1{
   align-items: center;
   width: 100%;
 }
-
+#logIn_user_email_block_icon{
+  background: url(../../assets/icons/email_icon.svg) center center no-repeat;
+}
 .logIn_user_name_block_icon {
   width: 24px;
   height: 24px;

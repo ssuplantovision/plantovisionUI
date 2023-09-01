@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef  } from 'react';
 import { useNavigate  } from "react-router-dom";
 import '../Profile/Profile.css';
 import { Link } from "react-router-dom";
@@ -24,6 +24,12 @@ function Profile() {
     // Дополнительный код для сохранения данных, например, отправка на сервер
   };
 
+  const [image, setImage] = useState(`url('../../assets/images/mir.jpg'`); // Путь к изображению по умолчанию
+
+  const handleImageChange = (event:any) => {
+    const newImage = URL.createObjectURL(event.target.files[0]);
+    setImage(newImage);
+  };
 
   return (
     // <div onClick={getBackPage} className="App">
@@ -33,14 +39,25 @@ function Profile() {
       </header>
       {/* <div className='header_line'/> */}
       <div className='Profile_center'>
-        <div className='Profile_image'>
-          <div className='Profile_image_icon'/>
-          <a>Сергей</a>
-          <a>Миронов</a>
+      <div className='Profile_image'>
+      <div className='Profile_image_icon' style={{ backgroundImage: `url(${image})` }}>
+        <div className='ChangeImageOverlay'>
+          <input
+            type='file'
+            onChange={handleImageChange}
+            accept='image/*'
+            style={{ display: 'none' }}
+            id='fileInput'
+          />
+          <label htmlFor='fileInput'>Изменить</label>
         </div>
-        <div className='Profile_info'>
-
-        </div>
+      </div>
+      <div className='Profile_image_name'>
+        <a>Сергей</a>
+        <a>Миронов</a>
+      </div>
+    </div>
+    <div className='Profile_info'></div>
     </div>
     </div>
   );

@@ -32,6 +32,7 @@ function App() {
       
     </header>
     <div className='header_line'/>
+    
     </div>
   );
 }

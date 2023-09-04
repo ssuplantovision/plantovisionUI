@@ -8,7 +8,7 @@
   /* height: 700px; */
   /* width: 95%;
   height: 900px; */
-  /* height: 92vh; */
+  height: 92vh;
   width: 100%;
   background-color: rgb(230, 229, 229);
   /* margin: 20px auto; */
@@ -73,7 +73,7 @@
 }
 
 .ChangeImageOverlay {
-  height: 30px;
+  height: 71px;
   position: absolute;
   bottom: -100%; /* Скрываем за пределами родительского элемента */
   left: 0;
@@ -86,7 +86,7 @@
 }
 
 .Profile_image_icon:hover .ChangeImageOverlay {
-  bottom: 1vh; 
+  bottom: -3vh; 
 }
 
 button {
@@ -103,6 +103,7 @@ button {
 
 .Profile_image_name a {
   margin-right: 1vh;
+  font-size: 2vh;
 }
 
 .Profile_info {
@@ -132,7 +133,7 @@ button {
 }
 .Profile_info_add h1{
   
-  font-size: 4vh;
+  font-size: 3vh;
   
 }
 .Profile_info_div{
@@ -169,7 +170,9 @@ button {
   /* Ваши стили для изображений */
   cursor: pointer;
 }
-
+.Profile_info.testCreate{
+  display: none;
+}
 .Profile_info_image.enlarged {
   /* Стили для увеличенного изображения */
   z-index: 1;
@@ -202,6 +205,7 @@ button {
 }
 
 .EnlargedImage {
+
   max-width: 100%;
   max-height: 100%;
 }
@@ -209,11 +213,11 @@ button {
 box-shadow: 0em 0 1em rgba(0,247,255,1);
 }
 #res{
-  background: url(../../assets/images/res.png) center center no-repeat;
+  background: url(../../assets/images/exs1.png) center center no-repeat;
   background-size: cover;
 }
 #res1{
-  background: url(../../assets/images/res1.png) center center no-repeat;
+  background: url(../../assets/images/exs2.png) center center no-repeat;
   background-size: cover;
 }
 .Profile_info_text_date{
@@ -231,11 +235,14 @@ box-shadow: 0em 0 1em rgba(0,247,255,1);
   justify-content: center;
   text-align: center;
   width: 100%;
+  border-radius: 20px;
   height: 100%;
-  
+  transition: background-color 0.3s ease;
 }
 .Profile_info_hover:hover{
-  background: linear-gradient(45deg, rgba(0,247,255,1) 0%, rgba(0,131,255,1) 100%) center 0 round;
+  border-radius: 20px;
+  /* background: linear-gradient(45deg, rgba(0,247,255,1) 0%, rgba(0,131,255,1) 100%) center 0 round; */
+  background-color: rgba(0,247,255,1);
 }
 
 .FormOverlay {
@@ -336,7 +343,7 @@ margin-top: 3vh;
 }
 
 .AddPhotoButton:hover {
-  background-color: #0056b3; /* Зеленый цвет фона кнопки при наведении */
+  background-color: #0056b3;
 }
 
 .AddPhotoButton input[type="file"] {
@@ -351,10 +358,33 @@ margin-top: 3vh;
 }
 .photo_preview{
   margin-top: 30px;
-  width: 33vh;
-
+  /* width: 300px; */
+  height: 250px;
+  background-size: contain;
 }
 .Profile_settings{
   width: 100%;
   background: linear-gradient(45deg, rgba(0,247,255,1) 0%, rgba(0,131,255,1) 100%) center 0 round;
+}
+.Profile_image_flex{
+  display: flex;
+  flex-direction: column;
+}
+.Profile_setting_bt{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3vh;
+  width: 30vh;
+  height: 10vh;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 3vh;
+  transition: background-color 0.3s ease;
+  /* background: linear-gradient(45deg, rgba(0,247,255,1) 0%, rgba(0,131,255,1) 100%) center 0 round; */
+}
+.Profile_setting_bt:hover {
+  /* background: linear-gradient(45deg, rgba(0,247,255,1) 0%, rgba(0,131,255,1) 100%) center 0 round; */
+  background-color: rgba(0,247,255,1);
 }

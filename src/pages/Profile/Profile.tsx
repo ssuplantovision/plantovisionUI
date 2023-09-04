@@ -1,9 +1,12 @@
 import React, { useState, useRef  } from 'react';
 import { useNavigate  } from "react-router-dom";
 import '../Profile/Profile.css';
-import yourImage from '../../assets/images/res.png';
+import yourImage from '../../assets/images/exs1.png';
+import yourImage1 from '../../assets/images/exs2.png';
+
 
 import { Link } from "react-router-dom";
+import { channel } from 'diagnostics_channel';
 function Profile() {
 
   let navigate = useNavigate();
@@ -29,8 +32,11 @@ function Profile() {
   const [image, setImage] = useState(`url('../../assets/images/mir.jpg'`); // Путь к изображению по умолчанию
 
   const handleImageChange = (event:any) => {
+    console.log(event.target.files[0])
+    if(event.target.files[0] != null){
     const newImage = URL.createObjectURL(event.target.files[0]);
     setImage(newImage);
+    }
   };
 
 
@@ -69,11 +75,38 @@ function Profile() {
     toggleForm();
   };
 
+  const [imageChange, setImageChange] = useState(yourImage);
 
+  const backgroundImageMap : any = {
+    res: '/assets/images/res.png',
+    res1: '/assets/images/res1.png',
+    // Добавьте другие соответствия здесь, если необходимо
+  };
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
+  const [isTestCreate, setisTestCreate] = useState(false)
+  const toggleisTestCreate = () => {
+    console.log(formData)
+    if(formData.Profile_name_input !=='' && formData.Profile_name_input !==''){
+    setisTestCreate(true);
+    setFormData({
+      Profile_name_input: '',
+    Profile_age_input: '',
+    photo: null})
+    }
+  };
+  const toggleImageEnlargement = (id:any) => {
+   
+    var newImage = ''
+    if (id == 'res'){
+      newImage = yourImage
+    }else {
+      newImage = yourImage1
+    }
+    // const newImage = backgroundImageMap[id] || '/assets/images/res.png';
 
-  const toggleImageEnlargement = () => {
+    setImageChange(newImage);
     setIsImageEnlarged(!isImageEnlarged);
+  
   };
 
   return (
@@ -84,6 +117,7 @@ function Profile() {
       </header>
       {/* <div className='header_line'/> */}
       <div className='Profile_center'>
+      <div className='Profile_image_flex'>
       <div className='Profile_image'>
       <div className='Profile_image_icon' style={{ backgroundImage: `url(${image})` }}>
         <div className='ChangeImageOverlay'>
@@ -102,41 +136,15 @@ function Profile() {
         <a>Сергей</a>
         <a>Миронов</a>
       </div>
-      
+
+      </div>
+      <div className='Profile_setting_bt'> Настройки</div>
     </div>
+
+
     <div className='Profile_info_div'>
       
-    <div className='Profile_info'>
-        <div
-          className={`Profile_info_image ${isImageEnlarged ? 'enlarged' : ''}`}
-          id='res'
-          onClick={toggleImageEnlargement}
-        >
-        </div>
-        <div className='Profile_info_image' id='res1'>
-        </div>
-        <div className='Profile_info_text'>
-          <div className='Profile_info_text_date'>
-            <h1>Дата последнего изучения: </h1>
-            <a>02.08.2023</a>
-          </div>
-          <div className='Profile_info_text_date'>
-            <h1>Результат: </h1>
-            <a>Отклонение 1 пальца, плоскостопие</a>
-          </div>
-        </div>
-      </div>
-
-      {isImageEnlarged && (
-        <div className='ImageOverlay' onClick={toggleImageEnlargement}>
-          <div className='EnlargedImageContainer'>
-            <img
-              src={yourImage}
-              className='EnlargedImage'
-            />
-          </div>
-        </div>
-      )}
+    
 
     <div className='Profile_info'>
         <div className='Profile_info_image'/>
@@ -152,7 +160,40 @@ function Profile() {
           </div>
         </div>
     </div>
+    <div className={`Profile_info ${isTestCreate ? '' : 'testCreate'}`}>
+        <div
+          className={`Profile_info_image ${isImageEnlarged ? 'enlarged' : ''}`}
+          id='res'
+          onClick={() => toggleImageEnlargement('res')}
+        >
+        </div>
+        <div className={`Profile_info_image ${isImageEnlarged ? 'enlarged' : ''}`} 
+        id='res1' 
+        onClick={() => toggleImageEnlargement('res1')}>
+        </div>
+        <div className='Profile_info_text'>
+          <div className='Profile_info_text_date'>
+            <h1>Дата последнего изучения: </h1>
+            <a>02.08.2023</a>
+          </div>
+          <div className='Profile_info_text_date'>
+            <h1>Результат: </h1>
+            <a>Отклонение 1 пальца, плоскостопие</a>
+          </div>
+        </div>
+      </div>
 
+      {isImageEnlarged && (
+        <div className='ImageOverlay' onClick={toggleImageEnlargement}>
+          <div className='EnlargedImageContainer' >
+            <img
+           
+              src = {process.env.PUBLIC_URL + imageChange}
+              className='EnlargedImage'
+            />
+          </div>
+        </div>
+      )}
     <div className='Profile_info_add'>
         <div className='Profile_info_hover' onClick={toggleForm}>
           <h1>Добавить новое исследование</h1>
@@ -208,7 +249,7 @@ function Profile() {
                   />
                 </div>
               )}
-              <button type='submit' className='SaveButton'>Сохранить</button>
+              <button type='submit' className='SaveButton' onClick={toggleisTestCreate}>Сохранить</button>
               
             </form>
           </div>

@@ -19,7 +19,7 @@ function Login() {
       setError('Пожалуйста, введите логин.');
       
     }else{
-      setError('');
+      navigate('/profile')
     }
   };
 

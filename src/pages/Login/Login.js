@@ -36,15 +36,10 @@ function Login() {
 
 	if (isAuthenticated) return <Navigate to='/profile' />;
   return (
-    // <div onClick={getBackPage} className="App">
+
     <Layout title='Вход' content='Login page'>
     <div className='LogInPage'>
-      {/* <header> */}
-      {/* <Link to='/ ' style={{ textDecoration: 'none' }}> */}
-      {/* <div className='header_icon' onClick={getBackPage} style={{cursor:"pointer"}}/> */}
-      {/* </Link> */}
-      {/* </header> */}
-      {/* <div className='header_line'/> */}
+
       <form className='centerLogin' onSubmit={onSubmit}>
         <h1>Авторизация</h1>
         <div className='input_block'>

@@ -1,0 +1,16 @@
+#nav_color{
+    background-color: gray;
+}
+.img_block{
+    background: url(../assets/images/Plantovision_logo.png) 0 no-repeat;
+    width: 100px;
+    height: 40px;
+    background-size: contain;
+
+}
+.navbar-collapse{
+    display: flex;
+    height: 40px;
+    align-items: flex-end;
+    justify-content: flex-end;
+}

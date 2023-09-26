@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate  } from "react-router-dom";
+import Layout from '../../components/Layout';
 
 
 function Home() {
@@ -13,10 +14,10 @@ function Home() {
 
 
   return (
-    <div onClick={getBackPage} className="App">
-      <h1 >HUI</h1>
-
-    </div>
+    <Layout title='Главная' content='Home page'>
+    <h1 className='mb-5'>Auth Site</h1>
+    <p>Welcome to Auth Site!</p>
+  </Layout>
   );
 }
 

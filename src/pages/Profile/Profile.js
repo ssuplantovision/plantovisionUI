@@ -1,37 +1,54 @@
 import React, { useState, useRef  } from 'react';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate, Navigate  } from "react-router-dom";
 import '../Profile/Profile.css';
 import yourImage from '../../assets/images/exs1.png';
 import yourImage1 from '../../assets/images/exs2.png';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { resetRegistered, login } from '../../features/user';
+import Layout from '../../components/Layout';
 
 import { Link } from "react-router-dom";
-import { channel } from 'diagnostics_channel';
+// import { channel } from 'diagnostics_channel';
 function Profile() {
+  const navigate = useNavigate();
+   // Вызовы хуков useState перенесены на верхний уровень
+   const [image, setImage] = useState(`url('../../assets/images/mir.jpg'`); // Путь к изображению по умолчанию
+   const [isFormVisible, setIsFormVisible] = useState(false);
+   const [formData, setFormData] = useState({
+     Profile_name_input: '',
+     Profile_age_input: '',
+     photo: null,
+   });
+   const [imageChange, setImageChange] = useState(yourImage);
+   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
+   const [isTestCreate, setisTestCreate] = useState(false);
 
-  let navigate = useNavigate();
-  const getBackPage = () =>{
-      navigate('/')
-    
+  const { isAuthenticated, user, loading } = useSelector((state) => state.user);
+  
+
+  if (!isAuthenticated && !loading && user === null) {
+    return <Navigate to="/login" />;
   }
-  const [isEditing, setIsEditing] = useState(false);
-  const [firstName, setFirstName] = useState('Имя');
-  const [lastName, setLastName] = useState('Фамилия');
-  const [age, setAge] = useState('100 лет');
-  const [address, setAddress] = useState('Россия, г. Саратов, ул. Пушкина');
 
-  const handleEditClick = () => {
-    setIsEditing(true);
+  const getBackPage = () => {
+    // navigate('/')
   };
+  // const handleEditClick = () => {
+  //   setIsEditing(true);
+  // };
 
-  const handleSaveClick = () => {
-    setIsEditing(false);
-    // Дополнительный код для сохранения данных, например, отправка на сервер
-  };
+  // const handleSaveClick = () => {
+  //   setIsEditing(false);
+  //   // Дополнительный код для сохранения данных, например, отправка на сервер
+  // };
 
-  const [image, setImage] = useState(`url('../../assets/images/mir.jpg'`); // Путь к изображению по умолчанию
 
-  const handleImageChange = (event:any) => {
+ 
+
+
+
+
+  const handleImageChange = (event) => {
     console.log(event.target.files[0])
     if(event.target.files[0] != null){
     const newImage = URL.createObjectURL(event.target.files[0]);
@@ -39,19 +56,11 @@ function Profile() {
     }
   };
 
-
-  const [isFormVisible, setIsFormVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    Profile_name_input: '',
-    Profile_age_input: '',
-    photo: null,
-  });
-
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
   };
 
-  const handleInputChange = (e:any) => {
+  const handleInputChange = (e) => {
     const { name, value, type, files } = e.target;
     
     if (type === 'file') {
@@ -68,22 +77,12 @@ function Profile() {
     }
   };
 
-  const handleFormSubmit = (e:any) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     // Добавьте здесь логику для сохранения данных формы, включая фотографию
     console.log('Данные формы:', formData);
     toggleForm();
   };
-
-  const [imageChange, setImageChange] = useState(yourImage);
-
-  const backgroundImageMap : any = {
-    res: '/assets/images/res.png',
-    res1: '/assets/images/res1.png',
-    // Добавьте другие соответствия здесь, если необходимо
-  };
-  const [isImageEnlarged, setIsImageEnlarged] = useState(false);
-  const [isTestCreate, setisTestCreate] = useState(false)
   const toggleisTestCreate = () => {
     console.log(formData)
     if(formData.Profile_name_input !=='' && formData.Profile_name_input !==''){
@@ -94,7 +93,7 @@ function Profile() {
     photo: null})
     }
   };
-  const toggleImageEnlargement = (id:any) => {
+  const toggleImageEnlargement = (id) => {
    
     var newImage = ''
     if (id == 'res'){
@@ -111,6 +110,7 @@ function Profile() {
 
   return (
     // <div onClick={getBackPage} className="App">
+    <Layout title='Профиль' content='Login page'>
     <div className='ProfilePage'>
       <header>
       <div className='header_icon' onClick={getBackPage} style={{cursor:"pointer"}}/>
@@ -133,8 +133,9 @@ function Profile() {
         </div>
       </div>
       <div className='Profile_image_name'>
-        <a>Сергей</a>
-        <a>Миронов</a>
+      {user && (
+  <a>{user.first_name}#{user.pers_identifier}</a>
+)}
       </div>
 
       </div>
@@ -258,6 +259,7 @@ function Profile() {
     </div>
     </div>
     </div>
+    </Layout>
   );
 }
 

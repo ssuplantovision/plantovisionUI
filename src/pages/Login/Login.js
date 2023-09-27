@@ -73,9 +73,9 @@ function Login() {
             </div>
           </div>
           <a className='forgoten_passowrd'>Забыли пароль?</a>
-          <div className='logIn_enter'>
-            <button>Войти</button>
-          </div>
+          {/* <div className='logIn_enter'> */}
+            <button className='logIn_enter'>Войти</button>
+          {/* </div> */}
           {/* {error && <div style={{ color: 'red' }}>{error}</div>} */}
         </div>
        

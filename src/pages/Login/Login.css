@@ -124,6 +124,7 @@
   cursor: pointer;
   margin-top: 10%;
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
   border-radius: 150px;

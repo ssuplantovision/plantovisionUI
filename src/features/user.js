@@ -105,9 +105,11 @@ export const login = createAsyncThunk(
 	
 				return data;
 			} else {
+				console.log("1")
 				return thunkAPI.rejectWithValue(data);
 			}
 		} catch (err) {
+			console.log("2")
 			return thunkAPI.rejectWithValue(err.response.data);
 		}
 	}

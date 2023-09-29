@@ -1,5 +1,5 @@
 import React, { useState, useRef  } from 'react';
-import { useNavigate, Navigate  } from "react-router-dom";
+import { useNavigate, Navigate, NavLink  } from "react-router-dom";
 import '../Profile/Profile.css';
 import yourImage from '../../assets/images/exs1.png';
 import yourImage1 from '../../assets/images/exs2.png';
@@ -112,32 +112,22 @@ function Profile() {
     // <div onClick={getBackPage} className="App">
     <Layout title='Профиль' content='Login page'>
     <div className='ProfilePage'>
-      <header>
-      <div className='header_icon' onClick={getBackPage} style={{cursor:"pointer"}}/>
-      </header>
+  
       {/* <div className='header_line'/> */}
       <div className='Profile_center'>
       <div className='Profile_image_flex'>
-      <div className='Profile_image'>
-      <div className='Profile_image_icon' style={{ backgroundImage: `url(${image})` }}>
-        <div className='ChangeImageOverlay'>
-        
-          <input
-            type='file'
-            onChange={handleImageChange}
-            accept='image/*'
-            style={{ display: 'none' }}
-            id='fileInput'
-          />
-          <label htmlFor='fileInput'>Изменить</label>
+      <div className='Profile_image'>    
+      <div className='Profile_image_name'>
+        {user && (<a>{user.first_name}#{user.pers_identifier}</a>)}
+        <div class="btn-group secretkey mt-2">
+          <button type="button" class="btn secretkey" data-bs-toggle="dropdown" >
+            Секретный ключ
+          </button>
+          <ul class="dropdown-menu secretkey_toggle">
+            <li><a>{user && (user.secure_number)}</a></li>
+          </ul>
         </div>
       </div>
-      <div className='Profile_image_name'>
-      {user && (
-  <a>{user.first_name}#{user.pers_identifier}</a>
-)}
-      </div>
-
       </div>
       <div className='Profile_setting_bt'> Настройки</div>
     </div>
@@ -196,66 +186,12 @@ function Profile() {
         </div>
       )}
     <div className='Profile_info_add'>
-        <div className='Profile_info_hover' onClick={toggleForm}>
-          <h1>Добавить новое исследование</h1>
+        <div className='Profile_info_hover' >
+          <NavLink className='nav-link active uploadlink' to='/photoupload'>Добавить новое исследование</NavLink>
         </div>
       </div>
 
-      {isFormVisible && (
-        <div className='FormOverlay' onClick={toggleForm}>
-          <div className='FormContainer' onClick={(e) => e.stopPropagation()}>
-            <form onSubmit={handleFormSubmit}>
-              <h2>Заполните форму</h2>
-              <div className='form-group'>
-                <label htmlFor='Profile_name_input'>Имя:</label>
-                <input
-                  type='text'
-                  id='Profile_name_input'
-                  name='Profile_name_input'
-                  className='logIn_user_name_input'
-                  value={formData.Profile_name_input}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='Profile_age_input'>Возраст:</label>
-                <input
-                  type='text'
-                  id='Profile_age_input'
-                  name='Profile_age_input'
-                  className='Profile_age_input'
-                  value={formData.Profile_age_input}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className='form-group'>
-                <label className='AddPhotoButton'>
-                  Добавить фотографию
-                  <input
-                    type='file'
-                    id='photo'
-                    name='photo'
-                    accept='image/*' // Позволяет загружать только изображения
-                    onChange={handleInputChange}
-                  />
-                </label>
-              </div>
-              {formData.photo && (
-                <div className='photo-preview'>
-                  <img
-                    src={URL.createObjectURL(formData.photo)}
-                    alt='Превью фотографии'
-                    className='photo_preview'
-                    
-                  />
-                </div>
-              )}
-              <button type='submit' className='SaveButton' onClick={toggleisTestCreate}>Сохранить</button>
-              
-            </form>
-          </div>
-        </div>
-      )}
+      
     </div>
     </div>
     </div>

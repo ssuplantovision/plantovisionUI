@@ -8,7 +8,7 @@ import Layout from '../../components/Layout';
 function Login() {
 
   const dispatch = useDispatch();
-	const { loading, isAuthenticated, registered } = useSelector(
+	const { loading, isAuthenticated, user, registered } = useSelector(
 		state => state.user
 	);
 
@@ -31,6 +31,7 @@ function Login() {
 		e.preventDefault();
     console.log(email, password)
 		dispatch(login({ email, password }));
+    
 		console.log(isAuthenticated)
 	};
 

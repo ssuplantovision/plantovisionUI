@@ -98,7 +98,7 @@ export const login = createAsyncThunk(
 				console.log("Cookie data:", data)
 				document.cookie = `access_token=${data.access}; path=/`;
         		document.cookie = `refresh_token=${data.refresh}; path=/`;
-
+				
 				dispatch(getUser(data.access));
 			
 			

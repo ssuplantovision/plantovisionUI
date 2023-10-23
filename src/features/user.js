@@ -32,6 +32,72 @@ export const register = createAsyncThunk(
 	}
 );
 
+export const postphoto = createAsyncThunk('users/postphoto', async ({ user_name, user_photo }, thunkAPI) => {
+		console.log(user_name)
+		const formData = new FormData();
+		formData.append('user_name', user_name);
+		formData.append('user_photo', user_photo);
+		console.log(user_name, user_photo)
+		try {
+			const res = await fetch('http://localhost:8000/api/users/postphoto', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					// 'Content-Type': 'multipart/form-data',
+				},
+				body: formData,
+			});
+
+			const data = await res.json();
+
+			if (res.status === 201) {
+				return data;
+			} else {
+				return thunkAPI.rejectWithValue(data);
+			}
+		} catch (err) {
+			return thunkAPI.rejectWithValue(err.response.data);
+		}
+	}
+);
+
+export const getPhoto = createAsyncThunk('users/takephoto', async (_, thunkAPI) => {
+	const cookies = document.cookie.split(';');
+		let access = null;
+		for (const cookie of cookies) {
+		  const [name, value] = cookie.trim().split('=');
+		  if (name === 'access_token') {
+			access = value;
+			break;
+		  }
+		}
+	
+		if (!access) {
+		  // Если "access_token" не найден, обработайте это по вашему усмотрению
+		  return thunkAPI.rejectWithValue('Access Token не найден');
+		}
+	console.log(access)
+	try {
+		const res = await fetch('http://localhost:8000/api/users/takephoto', {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+				Authorization: `Bearer ${access}`,
+			},
+		});
+
+		const data = await res.json();
+
+		if (res.status === 200) {
+			return data;
+		} else {
+			return thunkAPI.rejectWithValue(data);
+		}
+	} catch (err) {
+		return thunkAPI.rejectWithValue(err.response.data);
+	}
+});
+
 const getUser = createAsyncThunk('users/me', async (access, thunkAPI) => {
 	
 	console.log(access)
@@ -55,21 +121,6 @@ const getUser = createAsyncThunk('users/me', async (access, thunkAPI) => {
 		return thunkAPI.rejectWithValue(err.response.data);
 	}
 });
-
-// const SingInComponent = (data) =>{
-// 	const [cookies, setCookie] = useCookies(['access', 'refresh'])
-// 	async function onSubmit(values) {
-
-	
-// 		let expires = new Date()
-// 		expires.setTime(expires.getTime() + 1000)
-// 		setCookie('access', data.access, { path: '/',  expires})
-// 		setCookie('refresh', data.refresh, {path: '/', expires})
-	
-// 		// ...
-// 	}
-// }
-
 
 export const login = createAsyncThunk(
 	'users/token',
@@ -174,8 +225,10 @@ export const logout = createAsyncThunk('users/logout', async () => {
 const initialState = {
 	isAuthenticated: false,
 	user: null,
+	users_photo: null,
 	loading: false,
 	registered: false,
+	access: "",
 };
 
 const userSlice = createSlice({
@@ -231,6 +284,7 @@ const userSlice = createSlice({
 			})
 			.addCase(logout.pending, state => {
 				state.loading = true;
+				
 			})
 			.addCase(logout.fulfilled, state => {
 				state.loading = false;
@@ -238,6 +292,17 @@ const userSlice = createSlice({
 				state.user = null;
 			})
 			.addCase(logout.rejected, state => {
+				state.loading = false;
+			})
+			.addCase(getPhoto.pending, state => {
+				state.loading = true;
+			})
+			.addCase(getPhoto.fulfilled, (state, action) => {
+				state.loading = false;
+				state.users_photo = action.payload;
+				state.isAuthenticated = true;
+			})
+			.addCase(getPhoto.rejected, state => {
 				state.loading = false;
 			});
 	},

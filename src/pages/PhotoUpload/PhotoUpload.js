@@ -13,7 +13,7 @@ import { fireEvent } from '@testing-library/react';
 function PhotoUpload() {
 
   const dispatch = useDispatch();
-  const { isAuthenticated, user, loading,users_photo } = useSelector(state => state.user);
+  const { isAuthenticated, user, posting_photo,users_photo } = useSelector(state => state.user);
   const [formData, setFormData] = useState({
     user_photo: null,
   });
@@ -40,7 +40,7 @@ function PhotoUpload() {
     const user_name = user.id;
     console.log(user_name, user_photo);
     dispatch(postphoto({ user_name, user_photo }));
-    console.log(isAuthenticated);
+    console.log(posting_photo);
   };
   const onGet = e => {
     e.preventDefault();

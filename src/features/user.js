@@ -98,6 +98,43 @@ export const getPhoto = createAsyncThunk('users/takephoto', async (_, thunkAPI) 
 	}
 });
 
+export const deletePhoto = createAsyncThunk('users/takephoto', async ({photo_pers_identifier, photo_secure_number }, thunkAPI) => {
+	const cookies = document.cookie.split(';');
+		let access = null;
+		for (const cookie of cookies) {
+		  const [name, value] = cookie.trim().split('=');
+		  if (name === 'access_token') {
+			access = value;
+			break;
+		  }
+		}
+		if (!access) {
+		  return thunkAPI.rejectWithValue('Access Token не найден');
+		}
+
+	try {
+		const formData = new FormData();
+		formData.append('photo_pers_identifier', photo_pers_identifier);
+		formData.append('photo_secure_number', photo_secure_number);
+
+		const res = await fetch('http://localhost:8000/api/users/takephoto', {
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${access}`,
+			},
+			body: formData,
+		});
+		if (res.status === 200) {
+			return 0;
+		} else {
+			const data = await res.json();
+			return thunkAPI.rejectWithValue(data);
+		}
+	} catch (err) {
+		return thunkAPI.rejectWithValue(err.response.data);
+	}
+});
+
 const getUser = createAsyncThunk('users/me', async (access, thunkAPI) => {
 	
 	console.log(access)
@@ -228,6 +265,7 @@ const initialState = {
 	users_photo: null,
 	loading: false,
 	registered: false,
+	posting_photo: false,
 	access: "",
 };
 
@@ -294,6 +332,17 @@ const userSlice = createSlice({
 			.addCase(logout.rejected, state => {
 				state.loading = false;
 			})
+
+			.addCase(postphoto.pending, state => {
+				state.posting_photo = false;
+			})
+			.addCase(postphoto.fulfilled, (state, action) => {
+				state.posting_photo = true;
+			})
+			.addCase(postphoto.rejected, state => {
+				state.posting_photo = false;
+			})
+
 			.addCase(getPhoto.pending, state => {
 				state.loading = true;
 			})

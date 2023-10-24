@@ -4,7 +4,7 @@ import '../Profile/Profile.css';
 import yourImage from '../../assets/images/exs1.png';
 import yourImage1 from '../../assets/images/exs2.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { resetRegistered, login, getPhoto } from '../../features/user';
+import { deletePhoto, getPhoto } from '../../features/user';
 import Layout from '../../components/Layout';
 
 import { Link } from "react-router-dom";
@@ -24,8 +24,9 @@ function Profile() {
   if (!isAuthenticated && !loading && user === null) {
     return <Navigate to="/login" />;
   }
-
-
+  const onDelete = (pers_ident, per_numb) => {
+    dispatch(deletePhoto({ photo_pers_identifier: pers_ident, photo_secure_number: per_numb }));
+  }
 
 
   return (
@@ -69,14 +70,17 @@ function Profile() {
         <div className='Profile_info_text'>
           <div className='Profile_info_text_date'>
           <h1>Дата последнего изучения: </h1>
-          <a>02.08.2023</a>
+          {/* <a>02.08.2023</a> */}
+          <a>{photo.photo_pers_identifier}</a>
           </div>
           <div className='Profile_info_text_date'>
           <h1>Результат: </h1>
-          <a>Отклонение 1 пальца, плоскостопие</a>
+          {/* <a>Отклонение 1 пальца, плоскостопие</a> */}
+          <a>{photo.photo_secure_number}</a>
           </div>
         </div>
     </div>
+    <button type='delete' className='SaveButton' onClick={() => onDelete(photo.photo_pers_identifier, photo.photo_secure_number)}>Удалить</button>
     </div>
     ))}
 

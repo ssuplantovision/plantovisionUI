@@ -13,13 +13,15 @@ import { fireEvent } from '@testing-library/react';
 function PhotoUpload() {
 
   const dispatch = useDispatch();
-  const { isAuthenticated, user, posting_photo,users_photo } = useSelector(state => state.user);
+  const { isAuthenticated, user,loading, posting_photo,users_photo } = useSelector(state => state.user);
   const [formData, setFormData] = useState({
     user_photo: null,
   });
 
   const {user_photo } = formData;
-  
+  if (!isAuthenticated && !loading && user === null) {
+    return <Navigate to="/login" />;
+  }
   const handleInputChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === 'file') {

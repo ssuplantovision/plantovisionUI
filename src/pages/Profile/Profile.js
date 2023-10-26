@@ -3,15 +3,13 @@ import { useNavigate, Navigate, NavLink  } from "react-router-dom";
 import '../Profile/Profile.css';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { deletePhoto, getPhoto } from '../../features/user';
+import { deletePhoto, getPhoto, setsecpassword } from '../../features/user';
 import Layout from '../../components/Layout';
 
-// import { channel } from 'diagnostics_channel';
 function Profile() {
     
   const dispatch = useDispatch();
-   // Вызовы хуков useState перенесены на верхний уровень
-   const { isAuthenticated, user, loading,users_photo } = useSelector(state => state.user);
+  const { isAuthenticated, user, loading,users_photo } = useSelector(state => state.user);
   const [isViewSecretkey, setisViewSecretkey]= useState(false);
    useEffect(() => {
     dispatch(getPhoto());
@@ -29,10 +27,12 @@ function Profile() {
     setisViewSecretkey(!isViewSecretkey)
   }
   const onShow = (pers_ident, per_numb) => {
-    
-    // dispatch(deletePhoto({ photo_pers_identifier: pers_ident, photo_secure_number: per_numb }));
-    //window.location.reload();
+    dispatch(setsecpassword({ sec_ident: pers_ident, sec_passwof: per_numb }));
+    // dispatch(getResultPhoto({ photo_pers_identifier: pers_ident, photo_secure_number: per_numb }));
+    console.log("OnShow")
+    // return <Navigate to="/resultphoto" />
   }
+
   return (
     <Layout title='Профиль' content='Login page'>
     <div className='ProfilePage'>
@@ -61,7 +61,7 @@ function Profile() {
             <th scope="col">Номер</th>
             <th scope="col">Фото</th>
             <th scope="col">Дата исследование</th>
-            <th scope="col">Результат</th>
+            {/* <th scope="col">Результат</th> */}
             <th scope="col">Посмотреть</th> 
             <th scope="col">Удалить</th> 
           </tr>
@@ -73,7 +73,7 @@ function Profile() {
               minHeight: "10em",
               display: "table-cell",
               verticalAlign: "middle",
-              fontSize: "3vh" 
+              fontSize: "2vh" 
               }}scope="row">{index + 1}</th>
             <td><img className='Profile_info_image'
               src={`http://localhost:8000${photo.user_photo}`}
@@ -82,27 +82,40 @@ function Profile() {
               minHeight: "10em",
               display: "table-cell",
               verticalAlign: "middle" ,
-              fontSize: "3vh" 
-              }}>28.03.2023</td>
+              fontSize: "2vh" 
+              }}>{photo.date_upload}</td>
+            {/* <td style={{
+              minHeight: "10em",
+              display: "table-cell",
+              verticalAlign: "middle" ,
+              fontSize: "2vh" 
+              }}>Плоскостопие</td> */}
             <td style={{
               minHeight: "10em",
               display: "table-cell",
               verticalAlign: "middle" ,
-              fontSize: "3vh" 
-              }}>Плоскостопие</td>
-            <td style={{
-              minHeight: "10em",
-              display: "table-cell",
-              verticalAlign: "middle" ,
-              fontSize: "3vh" 
-              }}><button type='show' 
+              fontSize: "2vh" 
+              }}>
+                {/* <button type='show' 
               className='ShowButton' 
-              onClick={() => onShow(photo.photo_pers_identifier, photo.photo_secure_number)}>Посмотреть</button></td>
+              onClick={() => onShow(photo.photo_pers_identifier, photo.photo_secure_number)}
+              // onClick={() => onTest()}
+              >Посмотреть</button> */}
+              <NavLink type='show' 
+              className='ShowButton nav-link ' 
+
+              onClick={() => onShow(photo.photo_pers_identifier, photo.photo_secure_number)}
+              // onClick={() => onShow(photo.photo_pers_identifier, photo.photo_secure_number)}
+              to={{
+                pathname: '/resultphoto',
+              }}
+              >Посмотреть</NavLink>
+              </td>
               <td style={{
               minHeight: "10em",
               display: "table-cell",
               verticalAlign: "middle" ,
-              fontSize: "3vh" 
+              fontSize: "2vh" 
               }}> 
               <button type='delete' 
               className='DeleteButton' 

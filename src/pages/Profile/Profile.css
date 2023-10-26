@@ -35,7 +35,7 @@
   background: #336699;
 }
 .ShowButton{
-  font-size: 2vh;
+  font-size: 70%;
   cursor: pointer;
   display: flex;
   width: 50%;
@@ -48,7 +48,7 @@
   background: #336699;
 }
 .DeleteButton{
-  font-size: 2vh;
+  font-size: 70%;
   cursor: pointer;
   display: flex;
   width: 50%;
@@ -86,7 +86,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #2F4858;
+  border: 2px;
+  border-color: black ;
+  background-color: #2e7cad;
 }
 .add_new_reviews h1{
   font-size: 3vh;
@@ -112,4 +114,5 @@
 .Profile_info_image{
   width: 100px;
   height: 100px;
+  border-radius: 8px;
 }

@@ -108,8 +108,8 @@ function SingUp() {
             </div>
           </div>
           
-          <div className='logIn_enter'>
-          <button >Зарегестрироваться</button>
+          <div >
+          <button className='logIn_enter'>Зарегестрироваться</button>
           </div>
           {/* {error && <div style={{ color: 'red' }}>{error}</div>} */}
         </div>

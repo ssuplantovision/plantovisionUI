@@ -12,6 +12,7 @@ import Login from "./pages/Login/Login";
 import SingUp from "./pages/SingUp/SingUp";
 import Profile from "./pages/Profile/Profile";
 import PhotoUpload from "./pages/PhotoUpload/PhotoUpload";
+import ResultPhotoPage from "./pages/ResultPhoto/ResultPhotoPage"
 function App() {
   
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<SingUp />} />
         <Route path='/photoupload' element={<PhotoUpload/>}/>
+        <Route path='/resultphoto' element={<ResultPhotoPage/>}/>
       </Routes>
   </Router>
   );

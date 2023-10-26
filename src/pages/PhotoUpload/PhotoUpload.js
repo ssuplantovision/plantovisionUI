@@ -43,15 +43,21 @@ function PhotoUpload() {
     console.log(user_name, user_photo);
     dispatch(postphoto({ user_name, user_photo }));
     console.log(posting_photo);
+    window.location.reload();
   };
-  const onGet = e => {
-    e.preventDefault();
-    dispatch(getPhoto());
-  };
+
     return(
         <Layout title='Загрузка фото' content='Login page'>       
         <div className='Photo_center' >
-           <div className='form-group'>
+          <div className='vw-100 app_up_block_Photo'>
+            <h1 className='h1'>Добавление нового исследования</h1>
+            <h3>Перед тем, как добавить новое исследование внимательно прочитайте инструкцию, чтобы оплучить более точный результат:</h3>
+            <h3>1. Снимок долежн быть сделан на плантоскопе.</h3>
+            <h3>2. На снимке должны быть видны ваши стопы под углом в 90 градусов.</h3>
+            <h3>3. Снимок должен быть достаточно хорошего качества, так как от него зависит результат.</h3>
+            <h3>После загрузки вашего изображения, результат появится в вашем личном кабинете, где вы сможете полностью посмотреть результат с пояснением. Приятного использования!</h3>
+          </div>
+          <div className='form-group'>
                 <label className='AddPhotoButton'>
                   Добавить фотографию
                   <input
@@ -63,20 +69,8 @@ function PhotoUpload() {
                   />
                 </label>
               </div>
-
-
-                  {users_photo && users_photo.map(photo => (
-      <div key={photo.user_photo}>
-        <img
-          src={`http://localhost:8000${photo.user_photo}`}
-          alt={`Фотография пользователя ${photo.user_name}`}
-        />
-      </div>
-    ))}
-
-
-
               {formData.user_photo && (
+                <div>
                 <div className='photo-preview'>
                   <img
                     src={URL.createObjectURL(formData.user_photo)}
@@ -84,10 +78,11 @@ function PhotoUpload() {
                     className='photo_preview'
                     
                   />
+                   
+                </div>
+                <button type='submit' className='AddPhotoButton' style={{width:"100%", fontSize:"3vh"}}onClick={onSubmit}>Сохранить</button>
                 </div>
               )}
-              <button type='submit' className='SaveButton' onClick={onSubmit}>Сохранить</button>
-              <button type='get' className='SaveButton' onClick={onGet}>Загрузить</button>
         </div>
       
         </Layout>

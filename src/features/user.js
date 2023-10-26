@@ -33,6 +33,20 @@ export const register = createAsyncThunk(
 );
 
 export const postphoto = createAsyncThunk('users/postphoto', async ({ user_name, user_photo }, thunkAPI) => {
+	const cookies = document.cookie.split(';');
+		let access = null;
+		for (const cookie of cookies) {
+		  const [name, value] = cookie.trim().split('=');
+		  if (name === 'access_token') {
+			access = value;
+			break;
+		  }
+		}
+	
+		if (!access) {
+		  // Если "access_token" не найден, обработайте это по вашему усмотрению
+		  return thunkAPI.rejectWithValue('Access Token не найден');
+		}
 		console.log(user_name)
 		const formData = new FormData();
 		formData.append('user_name', user_name);
@@ -43,7 +57,7 @@ export const postphoto = createAsyncThunk('users/postphoto', async ({ user_name,
 				method: 'POST',
 				headers: {
 					'Accept': 'application/json',
-					// 'Content-Type': 'multipart/form-data',
+					Authorization: `Bearer ${access}`,
 				},
 				body: formData,
 			});
@@ -98,6 +112,54 @@ export const getPhoto = createAsyncThunk('users/takephoto', async (_, thunkAPI) 
 	}
 });
 
+export const getResultPhoto = createAsyncThunk('users/resultphoto', async ({photo_pers_identifier, photo_secure_number}, thunkAPI) => {
+	const cookies = document.cookie.split(';');
+		let access = null;
+		for (const cookie of cookies) {
+		  const [name, value] = cookie.trim().split('=');
+		  if (name === 'access_token') {
+			access = value;
+			break;
+		  }
+		}
+	
+		if (!access) {
+		  // Если "access_token" не найден, обработайте это по вашему усмотрению
+		  return thunkAPI.rejectWithValue('Access Token не найден');
+		}
+	console.log(photo_pers_identifier, photo_secure_number, access)
+	const body = JSON.stringify({
+		photo_pers_identifier,
+		photo_secure_number,
+	});
+	console.log(body)
+	try {
+		console.log("fetch")
+		const res = await fetch('http://localhost:8000/api/users/resultphoto', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${access}`,
+			},
+			body,
+		});
+		const data = await res.json();
+		console.log(data)
+		console.log(data)
+		if (res.status === 200) {
+			console.log("200")
+			return data;
+		} else {
+			return thunkAPI.rejectWithValue(data);
+		}
+	} catch (err) {
+		console.log("Error")
+		return thunkAPI.rejectWithValue(err.response.data);
+	}
+});
+
+
 export const deletePhoto = createAsyncThunk('users/takephoto', async ({photo_pers_identifier, photo_secure_number }, thunkAPI) => {
 	const cookies = document.cookie.split(';');
 		let access = null;
@@ -125,6 +187,7 @@ export const deletePhoto = createAsyncThunk('users/takephoto', async ({photo_per
 			body: formData,
 		});
 		if (res.status === 200) {
+
 			return 0;
 		} else {
 			const data = await res.json();
@@ -266,7 +329,10 @@ const initialState = {
 	loading: false,
 	registered: false,
 	posting_photo: false,
+	users_result_photo:null,
 	access: "",
+	sec_passwof : "",
+	sec_ident : "",
 };
 
 const userSlice = createSlice({
@@ -276,6 +342,10 @@ const userSlice = createSlice({
 		resetRegistered: state => {
 			state.registered = false;
 		},
+		setsecpassword: (state, action) => {
+			state.sec_ident = action.payload.sec_ident;
+			state.sec_passwof = action.payload.sec_passwof;
+		  },
 	},
 	extraReducers: builder => {
 		builder
@@ -353,9 +423,21 @@ const userSlice = createSlice({
 			})
 			.addCase(getPhoto.rejected, state => {
 				state.loading = false;
+			})
+			
+			.addCase(getResultPhoto.pending, state => {
+				state.loading = true;
+			})
+			.addCase(getResultPhoto.fulfilled, (state, action) => {
+				state.loading = false;
+				state.users_result_photo = action.payload;
+				state.isAuthenticated = true;
+			})
+			.addCase(getResultPhoto.rejected, state => {
+				state.loading = false;
 			});
 	},
 });
 
-export const { resetRegistered } = userSlice.actions;
+export const { resetRegistered, setsecpassword } = userSlice.actions;
 export default userSlice.reducer;

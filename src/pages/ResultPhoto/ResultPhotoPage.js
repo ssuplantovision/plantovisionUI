@@ -19,7 +19,7 @@ function ResultPhotoPage() {
     return <Navigate to="/login" />;
   }
   
-
+  
     return(
         <Layout title='Загрузка фото' content='Login page'>       
         <div className='Photo_center' >
@@ -28,11 +28,14 @@ function ResultPhotoPage() {
         
         <div className='vw-100 app_up_block_Photo'>
         <h1 className='h1'>Результат исследований</h1>
-            <h3>Дата загрузки исследования: <span> {photo.date_upload};</span></h3>
-            <h3>Итоговый результат: <span> {photo.preview_result};</span></h3>
-            <h3>Пояснения:</h3>
-            <h3><span>{photo.result_view}</span></h3>
-            <h3>Номер и Код исследования для поиска: <span style={{color:"black"}}>{photo.photo_pers_identifier}</span>#<span style={{color:"black"}}>{photo.photo_secure_number}</span></h3>
+            <h3 style={{fontSize:"30px"}}>Дата загрузки исследования: &nbsp;<span> {photo.date_upload};</span></h3>
+            <h3 style={{fontSize:"30px"}}>Итоговый результат: &nbsp;<span> {photo.preview_result};</span></h3>
+            <h3 style={{fontSize:"30px", lineClamp:"3"}}>Коэффициент общий: &nbsp;<span>{photo.coeficientcommont};</span></h3>
+            <h3 style={{fontSize:"30px"}}>Коэффициент K: &nbsp;<span>{photo.coeficientK};</span></h3>
+            <h3 style={{fontSize:"30px"}}> Коэффициент I: &nbsp;<span> {photo.coeficientI};</span></h3>
+            <h3 style={{fontSize:"30px"}}>Пояснения:</h3>
+            <h3 style={{fontSize:"30px"}}> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{photo.result_view}</span></h3>
+            <h3 style={{fontSize:"30px"}}>Номер и Код исследования для поиска: &nbsp;<span style={{color:"black"}}>{photo.photo_pers_identifier}</span>#<span style={{color:"black"}}>{photo.photo_secure_number}</span></h3>
             <h1 className='h1 mt-5'>Снимки результатов</h1>
             </div>
             <div className='Profile_Result_div mb-5'>
@@ -41,6 +44,9 @@ function ResultPhotoPage() {
             />
         <img className='Profile_Result_image'
               src={`http://localhost:8000${photo.user_photo_second}`}
+            />
+             <img className='Profile_Result_image'
+              src={`http://localhost:8000${photo.user_photo_third}`}
             />
             </div>
             </div>

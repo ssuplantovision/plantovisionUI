@@ -37,17 +37,27 @@ function ResultPhotoPage() {
             <h3 style={{fontSize:"30px"}}> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{photo.result_view}</span></h3>
             <h3 style={{fontSize:"30px"}}>Номер и Код исследования для поиска: &nbsp;<span style={{color:"black"}}>{photo.photo_pers_identifier}</span>#<span style={{color:"black"}}>{photo.photo_secure_number}</span></h3>
             <h1 className='h1 mt-5'>Снимки результатов</h1>
-            </div>
+            </div >
             <div className='Profile_Result_div mb-5'>
+              <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
             <img className='Profile_Result_image'
               src={`http://localhost:8000${photo.user_photo_first}`}
             />
+            <p style={{fontSize:"3vh", color:"white"}}>Индекс распластанности</p>
+            </div>
+            <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
         <img className='Profile_Result_image'
               src={`http://localhost:8000${photo.user_photo_second}`}
+              alt='Индекс Штритера'
             />
+            <p style={{fontSize:"3vh", color:"white"}}>Индекс Штритера</p>
+            </div>
+            <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
              <img className='Profile_Result_image'
               src={`http://localhost:8000${photo.user_photo_third}`}
             />
+            <p style={{fontSize:"3vh", color:"white"}}>Индекс Вальгуса</p>
+            </div>
             </div>
             </div>
         ))}

@@ -43,7 +43,7 @@ function PhotoUpload() {
     console.log(user_name, user_photo);
     dispatch(postphoto({ user_name, user_photo }));
     console.log(posting_photo);
-    window.location.reload();
+    // window.location.reload();
   };
 
     return(

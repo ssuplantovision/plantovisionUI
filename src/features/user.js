@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { removeCookie } from 'react-cookie';
 export const register = createAsyncThunk(
 	'users/register',
 	async ({ first_name, email, password }, thunkAPI) => {
@@ -229,8 +228,6 @@ export const login = createAsyncThunk(
 			email,
 			password,
 		});
-		
-
 		try {
 			const res = await fetch('http://localhost:8000/api/token/', {
 				method: 'POST',
@@ -240,7 +237,6 @@ export const login = createAsyncThunk(
 				},
 				body,
 			});
-
 			const data = await res.json();
 
 			if (res.status === 200) {
@@ -248,7 +244,7 @@ export const login = createAsyncThunk(
 				console.log(data.access)
 				console.log("Cookie data:", data)
 				document.cookie = `access_token=${data.access}; path=/`;
-        		document.cookie = `refresh_token=${data.refresh}; path=/`;
+        		document.cookie = `refresh_token=${data.refresh}; path=/ `;
 				
 				dispatch(getUser(data.access));
 			
@@ -280,7 +276,6 @@ export const checkAuth = createAsyncThunk(
 		}
 	
 		if (!access) {
-		  // Если "access_token" не найден, обработайте это по вашему усмотрению
 		  return thunkAPI.rejectWithValue('Access Token не найден');
 		}
 		const body = JSON.stringify({
@@ -315,8 +310,8 @@ export const checkAuth = createAsyncThunk(
 
 export const logout = createAsyncThunk('users/logout', async () => {
 	try {
-		document.cookie = `access_token=${"dasdas"}; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-		document.cookie = `refresh_token=${"dasdas"}; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+		document.cookie = `access_token=${"dasdas"};  path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+		document.cookie = `refresh_token=${"dasdas"};  path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
 	  return null;
 	} catch (error) {
 	  throw error;

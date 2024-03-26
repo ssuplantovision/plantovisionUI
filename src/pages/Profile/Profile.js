@@ -31,6 +31,7 @@ function Profile() {
     // dispatch(getResultPhoto({ photo_pers_identifier: pers_ident, photo_secure_number: per_numb }));
     console.log("OnShow")
     // return <Navigate to="/resultphoto" />
+  
   }
 
   return (
@@ -66,7 +67,7 @@ function Profile() {
             <th scope="col">Удалить</th> 
           </tr>
         </thead>
-        <tbody>
+        <tbody> 
         {users_photo && users_photo.map((photo, index) => (
           <tr key={photo.user_photo}>
             <th style={{
@@ -84,28 +85,16 @@ function Profile() {
               verticalAlign: "middle" ,
               fontSize: "2vh" 
               }}>{photo.date_upload}</td>
-            {/* <td style={{
-              minHeight: "10em",
-              display: "table-cell",
-              verticalAlign: "middle" ,
-              fontSize: "2vh" 
-              }}>Плоскостопие</td> */}
             <td style={{
               minHeight: "10em",
               display: "table-cell",
               verticalAlign: "middle" ,
               fontSize: "2vh" 
               }}>
-                {/* <button type='show' 
-              className='ShowButton' 
-              onClick={() => onShow(photo.photo_pers_identifier, photo.photo_secure_number)}
-              // onClick={() => onTest()}
-              >Посмотреть</button> */}
               <NavLink type='show' 
               className='ShowButton nav-link ' 
 
               onClick={() => onShow(photo.photo_pers_identifier, photo.photo_secure_number)}
-              // onClick={() => onShow(photo.photo_pers_identifier, photo.photo_secure_number)}
               to={{
                 pathname: '/resultphoto',
               }}

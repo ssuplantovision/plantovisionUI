@@ -49,14 +49,14 @@ function Login() {
             <div className='logIn_user_name_block'>
               <div className='logIn_user_name_block_icon'/>
               <input placeholder='Введите почту...' 
-              className='logIn_user_name_input'
-              type='email'
-						name='email'
-						onChange={onChange}
-						value={email}
-						required></input>
-            </div>
-          </div>
+                  className='logIn_user_name_input'
+                  type='email'
+                name='email'
+                onChange={onChange}
+                value={email}
+                required></input>
+                </div>
+              </div>
           
           <div className='logIn_user_password'>
             <a>Пароль</a>

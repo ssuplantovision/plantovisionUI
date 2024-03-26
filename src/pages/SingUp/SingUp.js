@@ -8,29 +8,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../../features/user';
 function SingUp() {
 
-  // let navigate = useNavigate();
-  // const getBackPage = () =>{
-  //     navigate('/')
-    
-  // }
-  // const [password, setPassword] = useState('');
-  // const [login, setLogin] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [error, setError] = useState('');
-  // const handleLogin = () => {
-  //   if (password === '') {
-  //     setError('Пожалуйста, введите пароль.');
-  //   } else if (login === ''){
-  //     setError('Пожалуйста, введите логин.');
-      
-  //   }else if (email === ''){
-  //     setError('Пожалуйста, введите почту.');
-      
-  //   }else{
-  //     setError('');
-  //   }
-  // };
-
   const dispatch = useDispatch();
 	const { registered, loading } = useSelector(state => state.user);
 
@@ -56,16 +33,8 @@ function SingUp() {
 	if (registered) return <Navigate to='/login' />;
 
   return (
-    // <div onClick={getBackPage} className="App">
     <Layout title='Регистрация' content='Register page'>
     <div className='LogInPage'  >
-      {/* <header>
-   
-      <div className='header_icon' onClick={getBackPage} style={{cursor:"pointer"}}/>
-     
-      </header> */}
-      {/* <div className='header_line'/> */}
-      {/* <div className='header_line'/> */}
       <form onSubmit={onSubmit}>
         <h1>Регистрация</h1>
         <div className='input_block'>

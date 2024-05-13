@@ -47,8 +47,10 @@ function PhotoUpload() {
   };
 
     return(
-        <Layout title='Загрузка фото' content='Login page'>       
+        <Layout title='Загрузка фото' content='Login page'>
+          <div className='resultMain'>    
         <div className='Photo_center' >
+          <div>
           <div className='vw-100 app_up_block_Photo'>
             <h1 className='h1'>Добавление нового исследования</h1>
             <h3>Перед тем, как добавить новое исследование внимательно прочитайте инструкцию, чтобы оплучить более точный результат:</h3>
@@ -56,6 +58,7 @@ function PhotoUpload() {
             <h3>2. На снимке должны быть видны ваши стопы под углом в 90 градусов.</h3>
             <h3>3. Снимок должен быть достаточно хорошего качества, так как от него зависит результат.</h3>
             <h3>После загрузки вашего изображения, результат появится в вашем личном кабинете, где вы сможете полностью посмотреть результат с пояснением. Приятного использования!</h3>
+          </div>
           </div>
           <div className='form-group'>
                 <label className='AddPhotoButton'>
@@ -84,7 +87,7 @@ function PhotoUpload() {
                 </div>
               )}
         </div>
-      
+        </div>   
         </Layout>
     );
 }

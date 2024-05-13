@@ -21,7 +21,8 @@ function ResultPhotoPage() {
   
   
     return(
-        <Layout title='Загрузка фото' content='Login page'>       
+        <Layout title='Загрузка фото' content='Login page'>    
+        <div className='resultPhtoto'> 
         <div className='Photo_center' >
         {users_result_photo && users_result_photo.map((photo, index) => (
             <div key={photo.user_photo}>
@@ -33,13 +34,13 @@ function ResultPhotoPage() {
         <h1 className='h1'>Результат исследований</h1>
             <h3 style={{fontSize:"30px"}}>Дата загрузки исследования: &nbsp;<span> {photo.date_upload};</span></h3>
             <h3 style={{fontSize:"30px"}}>Итоговый результат: &nbsp;<span> {photo.preview_result};</span></h3>
-            <h3 style={{fontSize:"30px", lineClamp:"3"}}>Коэффициент продольного плоскостопия: &nbsp;<span>{photo.coeficientcommont};</span></h3>
+            {/* <h3 style={{fontSize:"30px", lineClamp:"3"}}>Коэффициент продольного плоскостопия: &nbsp;<span>{photo.coeficientcommont};</span></h3> */}
             <h3 style={{fontSize:"30px"}}>Коэффициент распластанности верхнего отдела стопы: &nbsp;<span>{photo.coeficientK};</span></h3>
-            <h3 style={{fontSize:"30px"}}> Индекс Вальгуса: &nbsp;<span> {photo.coefficient_alpha};</span></h3>
+            {/* <h3 style={{fontSize:"30px"}}> Индекс Вальгуса: &nbsp;<span> {photo.coefficient_alpha};</span></h3> */}
             <h3 style={{fontSize:"30px"}}> Индекс Штритера : &nbsp;<span> {photo.coeficientI};</span></h3>
             <h3 style={{fontSize:"30px"}}>Пояснения:</h3>
             <h3 style={{fontSize:"30px"}}> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{photo.result_view}</span></h3>
-            <h3 style={{fontSize:"25px"}}>Номер и Код исследования для поиска: &nbsp;<span style={{color:"black"}}>{photo.photo_pers_identifier}</span>#<span style={{color:"black"}}>{photo.photo_secure_number}</span></h3>
+            <h3 style={{fontSize:"25px"}}>Номер и Код исследования для поиска: &nbsp;<span style={{color:"#167ffb"}}>{photo.photo_pers_identifier}</span>#<span style={{color:"#167ffb"}}>{photo.photo_secure_number}</span></h3>
             <h1 className='h1 mt-5'>Снимки результатов</h1>
             </div >
             <div className='Profile_Result_div mb-5'>
@@ -47,26 +48,26 @@ function ResultPhotoPage() {
             <img className='Profile_Result_image'
               src={`http://localhost:8000${photo.user_photo_first}`}
             />
-            <p style={{fontSize:"3vh", color:"white"}}>Индекс распластанности</p>
+            <p style={{fontSize:"3vh", color:"black"}}>Индекс распластанности</p>
             </div>
             <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
         <img className='Profile_Result_image'
               src={`http://localhost:8000${photo.user_photo_second}`}
               alt='Индекс Штритера'
             />
-            <p style={{fontSize:"3vh", color:"white"}}>Индекс Штритера</p>
+            <p style={{fontSize:"3vh", color:"black"}}>Индекс Штритера</p>
             </div>
-            <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+            {/* <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
              <img className='Profile_Result_image'
               src={`http://localhost:8000${photo.user_photo_third}`}
             />
             <p style={{fontSize:"3vh", color:"white"}}>Продольное плоскостопие</p>
-            </div>
+            </div> */}
             </div>
             </div>
         ))}
         </div>
-      
+        </div>  
         </Layout>
     );
 }

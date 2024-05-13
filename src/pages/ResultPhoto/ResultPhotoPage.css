@@ -1,17 +1,23 @@
 h3 span{
-    color: #DAF7DC
+    color: #167ffb
 }
 .Photo_center{
     overflow-x: hidden;
+    border-radius: 10px;
 }
 .Profile_Result_div{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    background-color: white ;
 }
 .Profile_Result_image{
     max-width: 100%;
     height: 70vh;
     
+}
+.resultPhtoto{
+    padding: 10px 10px 10px 10px;
+
 }

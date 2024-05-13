@@ -4,7 +4,8 @@
     align-items: center;
 }
 .app_up_block_Photo{
-    background-color: #336699;
+  padding: 10px 10px 10px 10px;
+    background-color: white;
     max-width: 100%;
 
 }
@@ -13,7 +14,7 @@
     margin-left: 2%;
     display: flex;
     
-    color: white;
+    color: black;
     font-family: 'Unbounded'
 }
 .app_up_block_Photo h1{
@@ -22,7 +23,7 @@
     align-items: center;
     justify-content: center;
     /* font-size: 3em; */
-    color: #DAF7DC;
+    color: black;
     font-family: 'Unbounded'
 }
   .form-group{
@@ -100,3 +101,4 @@
     font-size: 3em;
   }
    
+

@@ -2,10 +2,14 @@ import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../features/user';
 import './Navbar.css'
+import React, {useState} from 'react';
 const Navbar = () => {
 	const dispatch = useDispatch();
-	const { isAuthenticated } = useSelector(state => state.user);
-
+	const { isAuthenticated, user } = useSelector(state => state.user);
+	const [isViewSecretkey, setisViewSecretkey]= useState(false);
+	const getSecretKey = () => {
+		setisViewSecretkey(!isViewSecretkey)
+	  }
 	const authLinks = (
 		<>
 			<li className='nav-item'>
@@ -54,6 +58,16 @@ const Navbar = () => {
 				>
 					<span className='navbar-toggler-icon'></span>
 				</button>
+				{user && (
+					<div style={{display:'flex', alignItems:'flex-end', justifyContent:'center'}}>
+					 <div className='profileIcon'/>
+					 <a className='profileName'>{user.first_name}#{user.pers_identifier}</a>
+					 {!isViewSecretkey && <button className='ProfileSecretKey' type="take_sec" onClick={getSecretKey}>Секретный ключ</button>} 
+					 {isViewSecretkey && (<div className='secret_key'>
+					   <a>{user && (user.secure_number)}</a> 
+					 </div>)}
+					</div>
+				)}
 				<div className='collapse navbar-collapse' id='navbarNav'>
 					<ul className='navbar-nav'>
 						<li className='nav-item'>
@@ -61,6 +75,7 @@ const Navbar = () => {
 								Главная
 							</NavLink>
 						</li>
+			
 						{isAuthenticated ? authLinks : guestLinks}
 					</ul>
 				</div>
